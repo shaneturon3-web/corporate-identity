@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Allow: /ai-context
+Allow: /portfolio/
+
+User-agent: GPTBot
+Allow: /ai-context
+Allow: /portfolio/
+Disallow: /src/
+
+User-agent: ClaudeBot
+Allow: /ai-context
+Allow: /portfolio/
+Disallow: /src/
+
+Sitemap: https://shaneturon.ca/sitemap-index.xml

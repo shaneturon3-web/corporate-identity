@@ -1,0 +1,20 @@
+---
+const { frontmatter } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="robots" content="index, follow" />
+	<title>{frontmatter.title} | Systems Architecture</title>
+</head>
+<body style="background: #0b0f19; color: #cbd5e1; font-family: monospace; line-height: 1.6; padding: 2rem; max-width: 900px; margin: 0 auto;">
+	<header style="border-bottom: 1px dashed #334155; padding-bottom: 1rem; margin-bottom: 2rem;">
+		<a href="/" style="color: #38bdf8; text-decoration: none;">&lt;-- RETURN TO ROOT</a>
+	</header>
+	<main>
+		<slot />
+	</main>
+</body>
+</html>
