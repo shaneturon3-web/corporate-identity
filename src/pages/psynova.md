@@ -30,19 +30,6 @@ PsyNova introduces a headless administrative wrapper engineered to consolidate y
 
 To eliminate regulatory, data privacy, and liability anxiety for licensed operators, the platform enforces strict structural perimeters between autonomous administrative tech and authoritative human judgment.
 
-```
-              ┌──────────────────────────────────────────┐
-              │          PsyNova Client Gateway          │
-              └────────────────────┬─────────────────────┘
-                                   │
- ┌─────────────────────────────────┼─────────────────────────────────┐
- ▼                                 ▼                                 ▼
-[ Zone 1: Transport & Ops ]   [ Zone 2: Compliance Boundary ]   [ Zone 3: Licensed Authority ]
-• Form Ingestion Pipelines    • Row-Level Data Partitioning     • Clinical Formulations
-• Automated Billing Engines   • At-Rest Column Encryption       • Statutory Accounting
-• rclone Sync & Redundancy    • Zero-Knowledge Data Maps        • Mandatory Human-in-the-Loop
-```
-
 ### Zone 1: The Operational & Support Layer (Administrative Tech)
 
 * **Mechanics:** Automated multi-channel document intake routing, calendar scheduling syncs, automated invoicing sequences, text-to-docket parsing pipelines, and automated ledger balance categorization.
@@ -62,9 +49,9 @@ To eliminate regulatory, data privacy, and liability anxiety for licensed operat
 
 ## 3. Core Technical Infrastructure Assets
 
-The production environment consists of **76 backend TypeScript files** running a high-performance NestJS engine, backed by a **23-component Vite frontend dashboard**.
+The production environment consists of 76 backend TypeScript files running a high-performance NestJS engine, backed by a 23-component Vite frontend dashboard.
 
-### Authoritative Relational Schema (Elite Migrations 08–10)
+### Authoritative Relational Schema (Elite Migrations 08-10)
 
 ```sql
 -- Entity A: Secure Cross-Lane Intake Ledger
@@ -104,7 +91,6 @@ export class ComplianceBoundaryInterceptor implements NestInterceptor {
       throw new HttpException('Zone 1 Abort: Missing Operational Token', HttpStatus.UNAUTHORIZED);
     }
 
-  // Assert Zone 3 Human Sign-off for sensitive professional mutations
     if (request.method === 'POST' && !request.body.professional_license_confirmed) {
       throw new HttpException('Zone 3 Structural Breach: Missing Licensed Professional Sign-Off', HttpStatus.FORBIDDEN);
     }
@@ -132,4 +118,4 @@ PsyNova does not operate as software-as-a-service overhead; it operates as an **
 
 * **Live Functional Application Platform:** [psynova.shaneturon.ca](https://psynova.shaneturon.ca)
 * **Operational Health Gateway Node:** [psynova.shaneturon.ca/api/health](https://psynova.shaneturon.ca/api/health)
-* **Platform Blueprint Directory:** [shaneturon.ca/psynova](https://shaneturon.ca/psynova/)
+* **Platform Blueprint Directory:** [shaneturon.ca/psynova](https://shaneturon.ca/psynova)
