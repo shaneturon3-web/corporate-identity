@@ -18,7 +18,7 @@ const { projects, id = "operational-feed" } = Astro.props;
       return (
         <li class="case-feed__item">
           <span class="case-feed__dot" aria-hidden="true"></span>
-          <a href={`/projects/${p.slug}/`} class="glass-card case-file-card scan-target">
+          <a href={`/case-files/${p.slug}/`} class="glass-card case-file-card scan-target">
             <div class="case-file-card__meta-tags">
               <span>[NODE: {meta.node}]</span>
               <span>[ENCRYPT: {meta.encrypt}]</span>

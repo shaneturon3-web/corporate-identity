@@ -1,34 +1,153 @@
 ---
-import { getCollection } from "astro:content";
-import CinematicHero from "../components/mission/CinematicHero.astro";
-import CaseFileFeed from "../components/mission/CaseFileFeed.astro";
+import LiveStatusStrip from "../components/mission/LiveStatusStrip.astro";
+import LivePulse from "../components/mission/LivePulse.astro";
 import "../styles/tokens.css";
 
-const projects = (await getCollection("projects", ({ data }) => !data.draft)).sort(
-  (a, b) => a.data.order - b.data.order,
-);
-const liveCount = projects.filter((p) => p.data.status === "NOW" || p.data.status === "PILOT").length;
+const flagships = [
+  {
+    title: "PsyNova",
+    tagline: "Virtual Clinic Pilot — regulated healthcare wrapper (Quebec / Law 25).",
+    status: "ONLINE",
+    href: "https://psynova.shaneturon.ca/",
+    external: true,
+  },
+  {
+    title: "ProSpine Accountant",
+    tagline: "Billable capacity recovery — ~6 hours per week returned to practice.",
+    status: "PILOT",
+    href: "/professional/dashboard/",
+    external: false,
+  },
+  {
+    title: "MKT Research",
+    tagline: "Workflow intelligence for positioning and campaign-to-handoff traceability.",
+    status: "PILOT",
+    href: "https://shipyard.shaneturon.ca/case-files/marketing/",
+    external: true,
+  },
+];
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shane Turon | Mission Control</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Shane Turon | Systems Architecture & Operations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body class="mission-body">
-  <CinematicHero
-    title="Shane Turon"
-    subtitle="Operational infrastructure for regulated practice, professional billing recovery, and CONTROL TOWER orchestration. Aerospace-grade presentation — Spine logic unchanged."
-    liveCount={liveCount}
-    totalCount={projects.length}
-  />
-  <CaseFileFeed projects={projects} />
+  <header class="inst-root">
+    <p class="inst-kicker">Institutional root · shaneturon.ca</p>
+    <h1 class="inst-title">Systems Architecture<br />& Operations</h1>
+    <p class="inst-lead">
+      Mission-control infrastructure for regulated practice, professional billing recovery,
+      and CONTROL TOWER orchestration. Case files and lab console live on Shipyard.
+    </p>
+    <LivePulse label="Spine telemetry — institutional perimeter" />
+    <LiveStatusStrip />
+    <nav class="inst-nav" aria-label="Flagship systems">
+      {flagships.map((f) => (
+        <a
+          href={f.href}
+          class="glass-card inst-flagship"
+          {...(f.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        >
+          <span class="inst-flagship-status">{f.status}</span>
+          <h2>{f.title}</h2>
+          <p>{f.tagline}</p>
+          <span class="inst-cta">Open →</span>
+        </a>
+      ))}
+    </nav>
+    <p class="inst-lab-link">
+      Case files &amp; operator lab:
+      <a href="https://shipyard.shaneturon.ca/case-files/">shipyard.shaneturon.ca/case-files/</a>
+      · Console:
+      <a href="https://shipyard.shaneturon.ca/console/">/console/</a>
+    </p>
+  </header>
   <footer class="mission-footer">
-    <p>© 2026 Shane Turon · Mission Control UI (RE-EXP-FERRARI-01) · <a href="/status/" style="color: var(--accent)">Status</a></p>
+    <p>© 2026 Shane Turon · Doctrine: CONTROL TOWER OPERATING-DOCTRINE-MASTER-RE24MAY2</p>
   </footer>
 </body>
 </html>
+
+<style>
+  .inst-root {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+  .inst-kicker {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-dim);
+    margin: 0 0 1rem;
+  }
+  .inst-title {
+    font-size: clamp(3rem, 10vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    margin: 0 0 1.25rem;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .inst-lead {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 40rem;
+    margin: 0 0 1.5rem;
+    line-height: 1.55;
+  }
+  .inst-nav {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    margin-top: 2rem;
+  }
+  .inst-flagship {
+    grid-column: span 12;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  @media (min-width: 768px) {
+    .inst-flagship { grid-column: span 4; }
+  }
+  .inst-flagship h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text);
+  }
+  .inst-flagship p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    flex: 1;
+  }
+  .inst-flagship-status {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--live);
+  }
+  .inst-cta {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-dim);
+  }
+  .inst-lab-link {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .inst-lab-link a {
+    color: var(--accent);
+  }
+</style>

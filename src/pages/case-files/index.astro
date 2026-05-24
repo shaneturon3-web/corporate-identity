@@ -16,21 +16,21 @@ const staticSlugs = projects.map((p) => p.slug);
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Operational Case Files — Shane Turon</title>
+  <title>Case Files — Shipyard</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body class="mission-body">
   <div class="mission-main" style="padding-top: 2rem;">
-    <a class="back-link" href="/">← Mission control</a>
+    <a class="back-link" href="https://shaneturon.ca/">← Institutional root</a>
     <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin: 1rem 0 2rem;">
       <h1 style="margin: 0; font-size: clamp(2rem, 5vw, 3rem); color: var(--accent); letter-spacing: -0.03em;">
-        Operational feed
+        Case Files
       </h1>
-      <LivePulse label="Gallery sync active" />
+      <LivePulse label="Shipyard lab — spine sync" />
     </div>
     <p style="color: var(--muted); margin-bottom: 2rem; max-width: 40rem;">
-      Palantir-style case file timeline. D1 rows append below without redeploy
-      (<code style="color: var(--accent)">?role=BACKEND_ADMIN</code> for hidden modules).
+      Operational case files — Problem → Systems Analysis → Deployment. Console at
+      <a href="https://shipyard.shaneturon.ca/console/" style="color: var(--accent)">/console/</a>.
     </p>
     <CaseFileFeed projects={projects} id="gallery-feed" />
     <div id="d1-feed-append" class="mission-main" style="padding: 0; margin-top: -1rem;">

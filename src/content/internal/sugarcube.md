@@ -10,7 +10,7 @@ architecture:
   - "Tri-phase: Research / Architectural / Engineering"
 highlights:
   - "Indexed under SUGARCUBE_DOCTRINE in CONTROL TOWER"
-  - "draft: true — excluded from /projects/ gallery"
+  - "draft: true — excluded from public case-file gallery"
 businessModel: "Internal doctrine"
 complianceStrata: "Private operational context"
 demoUrl: ""
@@ -25,7 +25,7 @@ Family and household system workflows need doctrine-level rules without appearin
 ## Constraints
 
 - This page must remain `draft: true` and live in the `internal` collection.
-- Do not expose on the public ShipYard gallery.
+- Do not expose on the public Shipyard case-file gallery.
 
 ## Systems Analysis
 
@@ -34,4 +34,4 @@ SugarCube doctrine absorbs the former `FAMILY_OS` index entry. Cloud AI sessions
 ## Deployment
 
 - Registry: `06_PROJECT_INDEX/PROJECT_INDEX.md` — `SUGARCUBE_DOCTRINE` line
-- Hidden case work (E4C) remains in `HIDDEN_SLUGS.md`, separate from this doctrine page
+- Hidden slugs remain in CONTROL TOWER `HIDDEN_SLUGS.md` (not on public build)

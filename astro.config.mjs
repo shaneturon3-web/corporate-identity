@@ -26,9 +26,11 @@ export default defineConfig({
   vite: {
     server: {
       host: true,
+      // true = allow Cloudflare quick tunnel (*.trycloudflare.com) during local preview
       allowedHosts: [
         "localhost",
         "127.0.0.1",
+        ".trycloudflare.com",
         SITE_HOSTS.root,
         SITE_HOSTS.shipyard,
         SITE_HOSTS.psynova,

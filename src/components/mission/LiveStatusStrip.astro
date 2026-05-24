@@ -1,0 +1,57 @@
+---
+/** Honest live status labels (Order 041). */
+const statuses = [
+  { system: "PsyNova", label: "ONLINE", tone: "live" },
+  { system: "Control Tower", label: "FUTURE", tone: "future" },
+  { system: "Shipyard", label: "PILOT", tone: "pilot" },
+  { system: "Analista", label: "ROADMAPPED", tone: "roadmap" },
+];
+---
+<div class="live-status-strip" role="status" aria-label="System status">
+  {statuses.map((s) => (
+    <div class={`live-status-item tone-${s.tone}`}>
+      <span class="live-status-name">{s.system}</span>
+      <span class="live-status-label">{s.label}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .live-status-strip {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    margin: 2rem 0;
+  }
+  .live-status-item {
+    grid-column: span 6;
+    background: rgba(26, 26, 26, 0.55);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 212, 212, 0.12);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .live-status-item {
+      grid-column: span 3;
+    }
+  }
+  .live-status-name {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  .live-status-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+  }
+  .tone-live .live-status-label { color: var(--live, #34d399); }
+  .tone-pilot .live-status-label { color: #fbbf24; }
+  .tone-future .live-status-label,
+  .tone-roadmap .live-status-label { color: var(--accent-dim, #737373); }
+</style>

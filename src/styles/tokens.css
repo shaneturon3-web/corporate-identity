@@ -2,7 +2,7 @@
 @import "./mission-control.css";
 
 :root {
-  --bg: #050505;
+  --bg: #0a0a0a;
   --surface: rgba(26, 26, 26, 0.55);
   --surface-solid: #1a1a1a;
   --border: rgba(212, 212, 212, 0.12);

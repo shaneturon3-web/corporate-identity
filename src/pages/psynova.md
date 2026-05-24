@@ -13,7 +13,7 @@ permalink: /psynova
   <div class="spec-cta">
     <a href="https://psynova.shaneturon.ca" class="cta-live" target="_blank" rel="noopener noreferrer">Open Live Application ↗</a>
     <a href="/psynova/clinical/" class="cta-blueprint">Layer 2 Clinical Wrapper (PILOT) →</a>
-    <a href="/projects/psynova-quebec/" class="cta-blueprint">ShipYard Card →</a>
+    <a href="https://shipyard.shaneturon.ca/case-files/psynova-quebec/" class="cta-blueprint">Case File →</a>
   </div>
 </div>
 
