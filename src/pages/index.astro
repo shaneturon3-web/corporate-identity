@@ -1,218 +1,142 @@
 ---
-// src/pages/index.astro
-// Definitive production-ready source for shaneturon.ca
+import { getCollection } from "astro:content";
+import ProjectCard from "../components/gallery/ProjectCard.astro";
 import "../styles/tokens.css";
+
+const projects = (await getCollection("projects", ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const liveCount = projects.filter((p) => p.data.status === "NOW" || p.data.status === "PILOT").length;
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shane Turon | Systems Architecture & Operations</title>
-    <style is:inline>
-        :root {
-            --bg-slate: var(--bg, #0a0a0a);
-            --border-muted: var(--border, #2a2a2a);
-            --text-secondary: var(--muted, #94a3b8);
-            --text-primary: var(--text, #f5f5f5);
-            /* Aligned with psynova-blueprint.css tokens */
-            --accent-blue: #38bdf8;  /* --accent */
-            --accent-green: #34d399; /* --live */
-            --future-gray: #475569;
-        }
-        body {
-            background-color: var(--bg-slate);
-            color: var(--text-primary);
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 2rem 1rem;
-            display: flex;
-            justify-content: center;
-        }
-        .container {
-            max-width: 800px;
-            width: 100%;
-        }
-        header {
-            margin-bottom: 3rem;
-        }
-        h1 {
-            font-size: 2.25rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.025em;
-        }
-        .sub-header {
-            color: var(--accent-blue);
-            font-weight: 500;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        section {
-            margin-bottom: 3rem;
-        }
-        h2 {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            letter-spacing: 0.1em;
-            border-bottom: 1px solid var(--border-muted);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .doctrine-text {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-        }
-        .card {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid var(--border-muted);
-            padding: 1.5rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-        }
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .card-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.25rem;
-            font-size: 0.95rem;
-        }
-        .links {
-            display: flex;
-            gap: 1.5rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-        a {
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-        a:hover {
-            opacity: 0.8;
-        }
-        .link-green { color: var(--accent-green); }
-        .link-blue { color: var(--accent-blue); }
-        /* Future State Styles */
-        .future-state {
-            opacity: 0.4;
-            pointer-events: none;
-            filter: grayscale(1);
-        }
-        .tag-planned {
-            font-size: 0.7rem;
-            background: var(--future-gray);
-            color: var(--bg-slate);
-            padding: 0.1rem 0.4rem;
-            border-radius: 2px;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-        footer {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-muted);
-            color: var(--future-gray);
-            font-size: 0.875rem;
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shane Turon | Portfolio & Systems</title>
 </head>
-<body>
-    <div class="container">
-        <!-- Header Section -->
-        <header>
-            <h1>Shane Turon</h1>
-            <div class="sub-header">
-                Systems Architecture • Enterprise Project Infrastructure • Workflow Engineering
-            </div>
-        </header>
-        <!-- Section A: Operational Doctrine -->
-        <section>
-            <h2>Operational Doctrine</h2>
-            <p class="doctrine-text">
-                Designing scalable operational infrastructure that bridges the gap between complex software systems and enterprise compliance bounds. Specializing in data deduplication pipelines, automated resource routing engines, and modular administrative frameworks that optimize professional capacity while enforcing strict operational perimeters.
-            </p>
-        </section>
-        <!-- Section B: Active Infrastructures -->
-        <section>
-            <h2>Active Infrastructures</h2>
-            
-            <!-- PsyNova -->
-            <div class="card">
-                <div class="card-title">PsyNova</div>
-                <p class="card-description">
-                    A modular administrative spine engineered to consolidate practice management workflows (intakes, secure billing matrices, and record retention) inside highly regulated or sensitive compliance boundaries.
-                </p>
-                <div class="links">
-                    <a href="https://psynova.shaneturon.ca" class="link-green" target="_blank" rel="noopener noreferrer">Open Live Application ↗</a>
-                    <a href="/psynova/" class="link-blue">Review Blueprint →</a>
-                </div>
-            </div>
-            <!-- ShipYard -->
-            <div class="card">
-                <div class="card-title">ShipYard</div>
-                <p class="card-description">
-                    A decoupled project orchestrator and technical execution engine utilizing deterministic Python-to-Bash interfaces to manage heterogeneous machine node structures.
-                </p>
-                <div class="links">
-                    <a href="/projects/corespine/" class="link-green">CoreSpine Case File →</a>
-                    <a href="https://shipyard.shaneturon.ca/" class="link-blue" target="_blank" rel="noopener noreferrer">ShipYard Console →</a>
-                </div>
-            </div>
-        </section>
-        <!-- Section C: Future-State Systems -->
-        <section>
-            <h2>Future-State Systems</h2>
-            
-            <!-- Sugar Cube Core -->
-            <div class="card future-state">
-                <div class="card-title">
-                    Sugar Cube Core
-                    <span class="tag-planned">[ Planned Phase: Roadmapped ]</span>
-                </div>
-                <p class="card-description">
-                    A semantic memory engine designed to transform unstructured information logs into denormalized knowledge matrices, replacing brittle relational structures with clean contextual continuity.
-                </p>
-            </div>
-            <!-- NBLM Engine -->
-            <div class="card future-state">
-                <div class="card-title">
-                    NBLM Engine
-                    <span class="tag-planned">[ Planned Phase: Roadmapped ]</span>
-                </div>
-                <p class="card-description">
-                    An automated compiler mapping raw presentation designs into audience-specific compliance wrappers, isolating generic operational productivity workflows from high-constraint regulatory fields.
-                </p>
-            </div>
-            <!-- Analista Financiero -->
-            <div class="card future-state">
-                <div class="card-title">
-                    Analista Financiero
-                    <span class="tag-planned">[ Planned Phase: Roadmapped ]</span>
-                </div>
-                <p class="card-description">
-                    An automated back-office ledger parsing agent running headless text-to-docket extraction routines for real-time practice capitalization audits.
-                </p>
-            </div>
-        </section>
-        <!-- Footer Section -->
-        <section>
-            <h2>ShipYard Gallery</h2>
-            <p class="doctrine-text">
-                <a href="/projects/" class="link-blue">View modular portfolio →</a> (CoreSpine NOW build)
-            </p>
-        </section>
-        <footer>
-            <p>© 2026 Shane Turon. All architectural integrity maintained.</p>
-        </footer>
-    </div>
+<body class="gallery-body">
+  <div class="gallery-wrap home-wrap">
+    <header class="home-hero">
+      <p class="home-kicker">Live portfolio · updated May 2026</p>
+      <h1>Shane Turon</h1>
+      <p class="home-lead">
+        Modular execution portfolio — {projects.length} case files ({liveCount} active pilots).
+        This is the product surface; orchestration runs behind ShipYard.
+      </p>
+      <nav class="home-launch" aria-label="Quick launch">
+        <a class="home-launch-primary" href="/projects/">Open full gallery →</a>
+        <a href="/professional/dashboard/">ProSpine dashboard</a>
+        <a href="/psynova/clinical/">PsyNova clinical</a>
+        <a href="https://shipyard.shaneturon.ca/" target="_blank" rel="noopener noreferrer">ShipYard console ↗</a>
+      </nav>
+    </header>
+
+    <section>
+      <h2 class="section-label">Portfolio (what you can click today)</h2>
+      <div class="gallery-grid">
+        {projects.map((p) => (
+          <ProjectCard
+            title={p.data.title}
+            tagline={p.data.tagline}
+            status={p.data.status}
+            layer={p.data.layer}
+            category={p.data.category}
+            architecture={p.data.architecture}
+            href={`/projects/${p.slug}/`}
+            permissionLevel={p.data.permissionLevel}
+          />
+        ))}
+      </div>
+    </section>
+
+    <section class="home-doctrine">
+      <h2 class="section-label">Doctrine</h2>
+      <p>
+        Operational infrastructure bridging software systems and compliance bounds —
+        deduplication pipelines, routing engines, and administrative frameworks.
+      </p>
+    </section>
+
+    <footer class="home-footer">
+      <p>© 2026 Shane Turon · <a href="/projects/">Gallery</a> · <a href="/status/">Status</a></p>
+    </footer>
+  </div>
 </body>
 </html>
+
+<style>
+  .home-wrap {
+    max-width: 1100px;
+  }
+  .home-hero {
+    margin-bottom: 2.5rem;
+  }
+  .home-kicker {
+    color: var(--accent, #38bdf8);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin: 0 0 0.5rem;
+  }
+  .home-hero h1 {
+    font-size: 2.25rem;
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.02em;
+  }
+  .home-lead {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 42rem;
+    margin: 0 0 1.25rem;
+  }
+  .home-launch {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .home-launch a {
+    color: var(--accent, #38bdf8);
+    text-decoration: none;
+  }
+  .home-launch a:hover {
+    text-decoration: underline;
+  }
+  .home-launch-primary {
+    background: var(--accent, #38bdf8);
+    color: #0a0a0a !important;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none !important;
+  }
+  .home-launch-primary:hover {
+    opacity: 0.9;
+  }
+  .section-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin: 0 0 1.25rem;
+  }
+  .home-doctrine p {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 40rem;
+  }
+  .home-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  .home-footer a {
+    color: var(--accent);
+  }
+</style>
