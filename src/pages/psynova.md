@@ -1,121 +1,117 @@
 ---
 layout: ../layouts/AgentLayout.astro
-title: PsyNova Practice Operations Engine • Architectural Blueprint
+title: PsyNova Practice Operations Engine
 permalink: /psynova
 ---
 
+<div class="spec-hero">
+  <div class="spec-meta">
+    <span class="spec-badge">Production Active</span>
+    <span class="spec-badge">Elite Build v2</span>
+  </div>
+  <p class="spec-host">OptiPlex Node → cloudflared → psynova.shaneturon.ca</p>
+  <div class="spec-cta">
+    <a href="https://psynova.shaneturon.ca" class="cta-live" target="_blank" rel="noopener noreferrer">Open Live Application ↗</a>
+    <a href="https://psynova.shaneturon.ca/api/health" class="cta-blueprint" target="_blank" rel="noopener noreferrer">API Health Check</a>
+  </div>
+</div>
+
 # PsyNova: The Practice Operations Wrapper
 
-**System Class:** Enterprise-Grade Modular Administrative Spine  
-**Deployment State:** Production-Active (Elite Build v2)  
-**Host Context:** Local OptiPlex Node Server ──[Secure cloudflared Tunnel]──> `psynova.shaneturon.ca`
+**System class:** Enterprise-grade modular administrative spine for regulated clinical and financial operations.
 
 ---
 
-## 1. The Commercial Proposition (The Marketing Layer)
+## 1. The Commercial Proposition
 
-### The Strategic Bottleneck: The "Accidental System Integrator" Trap
+### The strategic bottleneck: the accidental system integrator trap
 
-A licensed professional's most expensive asset is their billable hour. Yet, solo practitioners and small clinical operators are routinely forced to function as *accidental system integrators*. They lose up to an average of 6 hours weekly to non-billable back-office drag—manually moving sensitive client data across fragmented, uncooperative software silos, syncing calendars, managing intake forms, generating dockets, chasing accounting ledgers, and maintaining records retention policies.
+A licensed professional's most expensive asset is the billable hour. Solo practitioners and small clinical operators are routinely forced to function as *accidental system integrators*—losing up to six hours weekly to non-billable drag across fragmented software silos: calendars, intakes, dockets, ledgers, and retention policies.
 
-Fragmented software utilities do not fix this friction; they silently tax your operational runway through constant context switching and administrative leakage. **Growth that collapses the human operator is not scalable infrastructure.**
+Fragmented utilities do not fix this friction; they tax operational runway through context switching and administrative leakage. **Growth that collapses the human operator is not scalable infrastructure.**
 
-### The Infrastructure Solution: An Integrated Operational Spine
+### The infrastructure solution: an integrated operational spine
 
-PsyNova introduces a headless administrative wrapper engineered to consolidate your practice's back-office engine into a single, unified pipeline. Instead of forcing you to string together fragile, mismatched tools, PsyNova creates absolute operational continuity across patient acquisition, automated scheduling, secure billing, and long-term compliance-aware retention. It buys back your commodity administrative hours so you can focus entirely on the differentiator: **operating at the highest level of your professional license.**
+PsyNova consolidates the back-office engine into one pipeline: patient acquisition, scheduling, secure billing, and compliance-aware retention. It returns commodity administrative hours so you can focus on **operating at the highest level of your professional license.**
 
 ---
 
 ## 2. Architectural Blueprint: The 3-Layer Perimeter
 
-To eliminate regulatory, data privacy, and liability anxiety for licensed operators, the platform enforces strict structural perimeters between autonomous administrative tech and authoritative human judgment.
+Strict structural perimeters separate autonomous administrative technology from authoritative human judgment.
 
-### Zone 1: The Operational & Support Layer (Administrative Tech)
+<figure class="spec-figure">
+  <img src="/images/3-layer-perimeter.svg" alt="Diagram: PsyNova client gateway feeding three zones — transport and operations, compliance boundary, and licensed professional authority" width="640" height="200" />
+  <figcaption>The 3-layer perimeter — administrative tech, regulated data boundary, licensed judgment.</figcaption>
+</figure>
 
-* **Mechanics:** Automated multi-channel document intake routing, calendar scheduling syncs, automated invoicing sequences, text-to-docket parsing pipelines, and automated ledger balance categorization.
-* **Stack State:** Decoupled NestJS controller pipelines and custom Vite user workspaces optimized for high-throughput, low-latency back-office automation.
+<div class="zone-card zone1">
+  <h4>Zone 1 — Transport and operations (administrative tech)</h4>
+  <p>Automated intake routing, calendar sync, invoicing sequences, text-to-docket parsing, and ledger categorization. NestJS controller pipelines and Vite workspaces optimized for high-throughput back-office automation.</p>
+</div>
 
-### Zone 2: The Regulated Boundary (Data Security & Sovereignty)
+<div class="zone-card zone2">
+  <h4>Zone 2 — Regulated boundary (data security and sovereignty)</h4>
+  <p>Compliance wrappers for Quebec Law 25 and Canadian privacy baselines: encryption at rest, encrypted session cookies, multi-tenant token isolation. Postgres with deterministic migrations 01–10.</p>
+</div>
 
-* **Mechanics:** Enforces strict compliance wrappers meeting regional data sovereignty requirements (including Quebec Law 25 and Canadian privacy baselines). Outfitted with deep column-level database encryption at rest, secure isolated session state management via encrypted cookies, and multi-tenant token isolation.
-* **Persistence Tier:** High-performance local relational engine managing complex schema migrations (01–10) with complete deterministic transactional integrity.
-
-### Zone 3: The Licensed Professional Authority (Human Judgment)
-
-* **Mechanics:** Clinical psychological diagnostics, psychotherapeutic treatment planning, and statutory corporate financial accounting.
-* **The Non-Negotiable Constraint:** *Clinical and financial judgment always remains with the licensed professional.* The platform is structurally barred from automating, generating, or suggesting choices belonging to Zone 3. Every high-stakes diagnostic or ledger mutation remains strictly under the uncompromised jurisdiction of the human-in-the-loop professional.
+<div class="zone-card zone3">
+  <h4>Zone 3 — Licensed professional authority (human judgment)</h4>
+  <p>Clinical diagnostics, treatment planning, and statutory accounting remain with the licensed professional. The platform cannot automate, generate, or suggest Zone 3 decisions. High-stakes mutations require human-in-the-loop sign-off.</p>
+</div>
 
 ---
 
 ## 3. Core Technical Infrastructure Assets
 
-The production environment consists of 76 backend TypeScript files running a high-performance NestJS engine, backed by a 23-component Vite frontend dashboard.
+The production environment runs a **76-module NestJS backend** and a **23-component Vite dashboard** on the OptiPlex node, exposed through Cloudflare at [psynova.shaneturon.ca](https://psynova.shaneturon.ca).
 
-### Authoritative Relational Schema (Elite Migrations 08-10)
+<div class="stat-grid">
+  <div class="stat-pill"><span class="num">76</span><span class="label">Backend modules</span></div>
+  <div class="stat-pill"><span class="num">23</span><span class="label">Frontend components</span></div>
+  <div class="stat-pill"><span class="num">10</span><span class="label">Schema migrations</span></div>
+</div>
 
-```sql
--- Entity A: Secure Cross-Lane Intake Ledger
-CREATE TABLE professional_intakes (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    lane_assignment VARCHAR(50) NOT NULL CHECK (lane_assignment IN ('LANE_A_FINANCE', 'LANE_B_HEALTHCARE')),
-    encrypted_payload TEXT NOT NULL,
-    compliance_signature VARCHAR(255) NOT NULL,
-    human_signed_off BOOLEAN DEFAULT FALSE NOT NULL
-);
+### Relational domains (Elite migrations 08–10)
 
--- Entity B: Operational Ledger Tracking Matrix
-CREATE TABLE practice_ledger (
-    transaction_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    account_identifier VARCHAR(100) NOT NULL,
-    entry_date DATE NOT NULL,
-    gross_amount NUMERIC(10, 2) NOT NULL,
-    pareto_category VARCHAR(100),
-    reconciliation_state VARCHAR(50) DEFAULT 'PENDING' CHECK (reconciliation_state IN ('PENDING', 'VERIFIED', 'EXCLUDED'))
-);
-```
+<ul class="migration-list">
+  <li><strong>Migration 08 — Billing:</strong> Invoices, line items, payments, insurer-style claims, sliding-scale pricing rules, and receipts (amounts stored in cents, CAD default).</li>
+  <li><strong>Migration 09 — Clinical records:</strong> Clinical notes (intake, SOAP, progress, assessment), signed revisions, consents, attachment metadata, and an append-only audit log with hash-chain integrity.</li>
+  <li><strong>Migration 10 — Clinician workspace:</strong> Availability blocks, treatment plans and goals, secure messaging threads, and clinical decision-support alerts.</li>
+</ul>
 
-### Zone 2 Compliance Filter (NestJS Routing Interceptor)
+### Compliance boundary (operational rules)
 
-```typescript
-import { Injectable, NestInterceptor, ExecutionContext, CallHandler, HttpException, HttpStatus } from '@nestjs/common';
-import { Observable } from 'rxjs';
-
-@Injectable()
-export class ComplianceBoundaryInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const request = context.switchToHttp().getRequest();
-    const authHeader = request.headers['authorization'];
-
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      throw new HttpException('Zone 1 Abort: Missing Operational Token', HttpStatus.UNAUTHORIZED);
-    }
-
-    if (request.method === 'POST' && !request.body.professional_license_confirmed) {
-      throw new HttpException('Zone 3 Structural Breach: Missing Licensed Professional Sign-Off', HttpStatus.FORBIDDEN);
-    }
-
-    return next.handle();
-  }
-}
-```
+Every protected API route requires a valid Bearer operational token. Sensitive POST mutations that touch professional judgment require explicit licensed sign-off in the request body—structurally enforced before business logic executes. No automation crosses into Zone 3.
 
 ---
 
-## 4. Venture Monetization & Unit Economics
+## 4. Venture Monetization and Unit Economics
 
-PsyNova does not operate as software-as-a-service overhead; it operates as an **Infrastructure-as-a-Utility** asset, scaling directly with practice realization rates.
+PsyNova operates as **infrastructure-as-a-utility**, scaling with practice realization rates—not generic SaaS overhead.
 
-* **Standard Clinical Rate Basis:** Target rate modeled at **$180.00 / hour**.
-* **The 33% / 67% Operational Split Matrix:**
-  * **67% ($120.60)** is retained cleanly by the executing professional to account for direct service delivery, professional development, and diagnostic clinical overhead.
-  * **33% ($59.40)** is allocated to the PsyNova infrastructure engine to fund automated client acquisition channels, client intake logic, secure text-to-docket conversions, continuous backups, and systems engineering management.
-* **The Optimization Metric:** By eliminating non-billable front-end friction, the platform recovers administrative gaps, driving practice capacity safely toward an **85% to 90% utilization target** without adding operational exhaustion to the professional.
+* **Standard clinical rate basis:** **$180.00 / hour** (model target).
+* **33% / 67% operational split matrix:**
+  * **67% ($120.60/hr)** retained by the executing professional for direct service, development, and clinical overhead.
+  * **33% ($59.40/hr)** allocated to the PsyNova engine for acquisition, intake, text-to-docket, backups, and systems engineering.
+* **Optimization target:** Recover non-billable friction and drive utilization toward **85–90%** without operator exhaustion.
+
+<figure class="spec-figure">
+  <img src="/images/unit-economics-matrix.svg" alt="Diagram: 67 percent professional retention versus 33 percent infrastructure allocation per billable hour" width="640" height="160" />
+  <figcaption>33/67 split matrix — professional retention vs. infrastructure allocation.</figcaption>
+</figure>
+
+<div class="split-bar" role="img" aria-label="67 percent professional, 33 percent infrastructure">
+  <div class="seg67">67% Professional</div>
+  <div class="seg33">33% Infra</div>
+</div>
 
 ---
 
 ## 5. System Connections
 
-* **Live Functional Application Platform:** [psynova.shaneturon.ca](https://psynova.shaneturon.ca)
-* **Operational Health Gateway Node:** [psynova.shaneturon.ca/api/health](https://psynova.shaneturon.ca/api/health)
-* **Platform Blueprint Directory:** [shaneturon.ca/psynova](https://shaneturon.ca/psynova)
+<ul class="connection-list">
+  <li><a href="https://psynova.shaneturon.ca">Live application — psynova.shaneturon.ca</a></li>
+  <li><a href="https://psynova.shaneturon.ca/api/health">Operational health — /api/health</a></li>
+  <li><a href="https://shaneturon.ca/">Portfolio gateway — shaneturon.ca</a></li>
+</ul>

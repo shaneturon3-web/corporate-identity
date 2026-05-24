@@ -1,0 +1,316 @@
+/* PsyNova blueprint spec — SC-20260523-010 design system */
+
+:root {
+  --bg: #0b0f19;
+  --surface: #1e293b;
+  --border: #334155;
+  --text: #cbd5e1;
+  --heading: #f1f5f9;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --live: #34d399;
+  --zone1: #38bdf8;
+  --zone2: #a78bfa;
+  --zone3: #f472b6;
+  --economics: #22d3ee;
+}
+
+.spec-body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.65;
+  margin: 0;
+  padding: 2rem 1rem;
+}
+
+.spec-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.spec-nav {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--border);
+}
+
+.spec-nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.spec-nav a:hover {
+  text-decoration: underline;
+}
+
+.spec-article h1 {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--heading);
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+  line-height: 1.25;
+}
+
+.spec-article h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--heading);
+  margin: 2.5rem 0 1rem;
+  padding-left: 0.75rem;
+  border-left: 4px solid var(--accent);
+}
+
+.spec-article h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 1.5rem 0 0.75rem;
+}
+
+.spec-article h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--heading);
+  margin: 1rem 0 0.5rem;
+}
+
+.spec-article p {
+  margin: 0 0 1rem;
+  color: var(--text);
+}
+
+.spec-article strong {
+  color: var(--heading);
+}
+
+.spec-article em {
+  color: var(--muted);
+}
+
+.spec-article ul {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.spec-article li {
+  margin-bottom: 0.5rem;
+}
+
+.spec-article a {
+  color: var(--accent);
+}
+
+.spec-article hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+.spec-article pre,
+.spec-article code {
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 0.85rem;
+}
+
+.spec-article pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.spec-hero {
+  background: rgba(30, 41, 59, 0.55);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.spec-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.spec-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.spec-host {
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 0.8rem;
+  color: var(--muted);
+  word-break: break-all;
+  margin: 0;
+}
+
+.spec-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0 0;
+}
+
+.spec-cta a {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.spec-cta .cta-live {
+  color: var(--live);
+}
+
+.spec-cta .cta-blueprint {
+  color: var(--accent);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.stat-pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.stat-pill .num {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.stat-pill .label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.zone-card {
+  background: rgba(30, 41, 59, 0.45);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.zone-card.zone1 { border-left: 4px solid var(--zone1); }
+.zone-card.zone2 { border-left: 4px solid var(--zone2); }
+.zone-card.zone3 { border-left: 4px solid var(--zone3); }
+
+.zone-card h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  color: var(--heading);
+}
+
+.zone-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.split-bar {
+  display: flex;
+  height: 2rem;
+  border-radius: 0.35rem;
+  overflow: hidden;
+  margin: 1rem 0 1.25rem;
+  border: 1px solid var(--border);
+}
+
+.split-bar .seg67 {
+  width: 67%;
+  background: linear-gradient(90deg, var(--accent), #0ea5e9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--bg);
+}
+
+.split-bar .seg33 {
+  width: 33%;
+  background: linear-gradient(90deg, var(--economics), #06b6d4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--bg);
+}
+
+.spec-figure {
+  margin: 1.25rem 0 1.75rem;
+  text-align: center;
+  min-height: 10rem;
+  padding: 1rem;
+  background: rgba(30, 41, 59, 0.35);
+  border: 1px dashed var(--border);
+  border-radius: 0.5rem;
+}
+
+.spec-figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.35rem;
+  border: 1px solid var(--border);
+}
+
+.spec-figure figcaption {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+}
+
+.connection-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.connection-list li {
+  margin-bottom: 0.75rem;
+}
+
+.connection-list a {
+  display: inline-block;
+  padding: 0.5rem 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.connection-list a:hover {
+  border-color: var(--accent);
+}
+
+.migration-list li strong {
+  color: var(--accent);
+}

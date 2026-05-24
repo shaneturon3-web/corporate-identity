@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" role="img" aria-label="3-layer perimeter placeholder">
+  <rect width="640" height="200" fill="#0b0f19"/>
+  <text x="320" y="100" text-anchor="middle" fill="#475569" font-family="system-ui,sans-serif" font-size="12">3-layer perimeter  replace with final artwork</text>
+  <rect x="200" y="24" width="240" height="32" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+  <text x="320" y="46" text-anchor="middle" fill="#94a3b8" font-size="11">PsyNova Client Gateway</text>
+  <rect x="24" y="96" width="180" height="72" rx="4" fill="#1e293b" stroke="#38bdf8"/>
+  <rect x="230" y="96" width="180" height="72" rx="4" fill="#1e293b" stroke="#a78bfa"/>
+  <rect x="436" y="96" width="180" height="72" rx="4" fill="#1e293b" stroke="#f472b6"/>
+  <text x="114" y="128" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="700">ZONE 1</text>
+  <text x="320" y="128" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="700">ZONE 2</text>
+  <text x="526" y="128" text-anchor="middle" fill="#f472b6" font-size="10" font-weight="700">ZONE 3</text>
+</svg>
