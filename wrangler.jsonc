@@ -6,12 +6,8 @@
   "vars": {
     "SHIPYARD_ORIGIN": "https://shipyard.shaneturon.ca"
   },
-  "r2_buckets": [
-    {
-      "binding": "PROSPINE_VAULT",
-      "bucket_name": "prospine-vault"
-    }
-  ],
+  // Re-enable when R2 is activated in Cloudflare Dashboard (error 10042):
+  // "r2_buckets": [{ "binding": "PROSPINE_VAULT", "bucket_name": "prospine-vault" }],
   "d1_databases": [
     {
       "binding": "SPINE_DB",
