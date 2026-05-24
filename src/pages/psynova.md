@@ -12,7 +12,8 @@ permalink: /psynova
   <p class="spec-host">OptiPlex Node → cloudflared → psynova.shaneturon.ca</p>
   <div class="spec-cta">
     <a href="https://psynova.shaneturon.ca" class="cta-live" target="_blank" rel="noopener noreferrer">Open Live Application ↗</a>
-    <a href="https://psynova.shaneturon.ca/api/health" class="cta-blueprint" target="_blank" rel="noopener noreferrer">API Health Check</a>
+    <a href="/psynova/clinical/" class="cta-blueprint">Layer 2 Clinical Wrapper (PILOT) →</a>
+    <a href="/projects/psynova-quebec/" class="cta-blueprint">ShipYard Card →</a>
   </div>
 </div>
 
@@ -112,6 +113,10 @@ PsyNova operates as **infrastructure-as-a-utility**, scaling with practice reali
 
 <ul class="connection-list">
   <li><a href="https://psynova.shaneturon.ca">Live application — psynova.shaneturon.ca</a></li>
-  <li><a href="https://psynova.shaneturon.ca/api/health">Operational health — /api/health</a></li>
+  <li><a href="https://psynova.shaneturon.ca/api/healthcare/health">Operational health — /api/healthcare/health</a> (alias <a href="https://psynova.shaneturon.ca/api/health">/api/health</a>)</li>
   <li><a href="https://shaneturon.ca/">Portfolio gateway — shaneturon.ca</a></li>
 </ul>
+
+<p class="clinical-disclaimer" style="margin-top:2rem;padding-top:1rem;border-top:1px solid #2a2a2a;font-size:0.8rem;color:#94a3b8;font-style:italic;">
+  Clinical judgment always remains with the licensed professional.
+</p>

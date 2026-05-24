@@ -1,18 +1,29 @@
 {
-  "name": "corporate-identity",
+  "name": "shaneturon-ca",
   "type": "module",
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build --verbose",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "astro preview",
+    "pages:dev": "npm run build && wrangler pages dev dist",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name=corporate-identity",
+    "db:spine:local": "wrangler d1 execute corespine-db --local --file=./db/migrations/initial-spine-schema.sql",
+    "db:spine:remote": "wrangler d1 execute corespine-db --remote --file=./db/migrations/initial-spine-schema.sql",
+    "db:healthcare:remote": "wrangler d1 execute corespine-db --remote --file=./db/migrations/002-healthcare-shield.sql",
+    "db:professional:remote": "wrangler d1 execute corespine-db --remote --file=./db/migrations/003-professional-accountant.sql",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.0.0"
+    "@astrojs/react": "^3.6.3",
+    "astro": "^4.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250525.0",
     "wrangler": "^4.94.0"
   }
 }

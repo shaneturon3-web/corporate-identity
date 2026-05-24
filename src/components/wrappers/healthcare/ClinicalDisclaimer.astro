@@ -1,0 +1,23 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+<footer class:list={["clinical-disclaimer", className]} role="contentinfo">
+  <p>Clinical judgment always remains with the licensed professional.</p>
+</footer>
+
+<style>
+  .clinical-disclaimer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border, #2a2a2a);
+  }
+  .clinical-disclaimer p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--muted, #94a3b8);
+    font-style: italic;
+  }
+</style>

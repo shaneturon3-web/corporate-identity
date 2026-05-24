@@ -1,0 +1,40 @@
+---
+/** Headless module chrome — presentation-neutral wrapper for spine surfaces. */
+interface Props {
+  module: "intake" | "scheduling" | "billing" | "crm";
+  title: string;
+}
+const { module, title } = Astro.props;
+---
+<section class="spine-module" data-module={module}>
+  <header class="spine-module-head">
+    <span class="spine-module-label">{module}</span>
+    <h2>{title}</h2>
+  </header>
+  <div class="spine-module-body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .spine-module {
+    border: 1px solid #2a2a2a;
+    background: #1a1a1a;
+    padding: 1rem;
+  }
+  .spine-module-head {
+    margin-bottom: 0.75rem;
+  }
+  .spine-module-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #64748b;
+  }
+  .spine-module-head h2 {
+    margin: 0.25rem 0 0;
+    font-size: 1rem;
+    color: #f5f5f5;
+    font-weight: 500;
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "../../components/gallery/ProjectCard.astro";
+import "../../styles/tokens.css";
+
+const all = await getCollection("projects", ({ data }) => !data.draft);
+const projects = all.sort((a, b) => a.data.order - b.data.order);
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShipYard Gallery — Shane Turon</title>
+</head>
+<body class="gallery-body">
+  <div class="gallery-wrap">
+    <a class="back-link" href="/">← shaneturon.ca</a>
+    <h1>ShipYard Gallery</h1>
+    <p class="tagline">Modular execution portfolio — high signal, restrained presentation.</p>
+    <div class="gallery-grid">
+      {projects.map((p) => (
+        <ProjectCard
+          title={p.data.title}
+          tagline={p.data.tagline}
+          status={p.data.status}
+          layer={p.data.layer}
+          architecture={p.data.architecture}
+          href={`/projects/${p.slug}/`}
+        />
+      ))}
+    </div>
+  </div>
+</body>
+</html>
+
+<style>
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 1rem 0 0.5rem;
+  }
+  .tagline {
+    color: var(--muted);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+</style>

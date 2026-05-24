@@ -1,0 +1,57 @@
+---
+import Intake from "../../components/wrappers/professional/Intake";
+import DocumentVault from "../../components/wrappers/professional/DocumentVault";
+import BillingModule from "../../components/wrappers/professional/BillingModule";
+import ProSpineDashboard from "../../components/wrappers/professional/ProSpineDashboard";
+import StatusBadge from "../../components/gallery/StatusBadge.astro";
+import "../../styles/tokens.css";
+import "../../styles/professional-wrapper.css";
+
+const professionalId = "pro-demo";
+const demoClientId = "cli-demo-vault";
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProSpine Accountant — Ghost Mode</title>
+</head>
+<body class="gallery-body">
+  <div class="gallery-wrap">
+    <a class="back-link" href="/projects/">← ShipYard gallery</a>
+    <div style="display:flex;align-items:center;gap:0.75rem;margin:1rem 0 0.25rem;">
+      <StatusBadge status="NOW" />
+      <span class="layer-badge-inline">Layer 2 — Wrapper</span>
+    </div>
+    <h1 style="font-size:1.5rem;font-weight:500;margin:0 0 0.25rem;">ProSpine Accountant</h1>
+    <p class="tagline" style="margin-bottom:1.5rem;">Light Shield · Ghost Mode · CoreSpine Layer 1</p>
+    <ProSpineDashboard client:load professionalId={professionalId} />
+    <div class="stack" style="display:grid;gap:1.25rem;margin-top:1.25rem;">
+      <div class="stack-2" style="display:grid;gap:1.25rem;">
+        <Intake client:load professionalId={professionalId} />
+        <DocumentVault client:load clientId={demoClientId} professionalId={professionalId} />
+      </div>
+      <BillingModule client:load professionalId={professionalId} />
+    </div>
+  </div>
+</body>
+</html>
+
+<style>
+  @media (min-width: 900px) {
+    .stack-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .layer-badge-inline {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+  }
+</style>

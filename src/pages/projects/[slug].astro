@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from "astro:content";
+import StatusBadge from "../../components/gallery/StatusBadge.astro";
+import "../../styles/tokens.css";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects", ({ data }) => !data.draft);
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { entry: p } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{d.title} — Case File</title>
+</head>
+<body class="gallery-body">
+  <div class="case-wrap">
+    <a class="back-link" href="/projects/">← Gallery</a>
+    <StatusBadge status={d.status} />
+    <h1>{d.title}</h1>
+    <p class="tagline">{d.tagline}</p>
+    {d.businessModel && <p class="meta">Business model: {d.businessModel}</p>}
+    {d.complianceStrata && <p class="meta">{d.complianceStrata}</p>}
+    <div class="prose">
+      <Content />
+    </div>
+  </div>
+</body>
+</html>

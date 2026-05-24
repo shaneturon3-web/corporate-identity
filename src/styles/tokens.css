@@ -1,0 +1,92 @@
+/* Credibility Architecture — restrained dark (Order 003) */
+:root {
+  --bg: #0a0a0a;
+  --surface: #1a1a1a;
+  --border: #2a2a2a;
+  --text: #f5f5f5;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body.gallery-body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.gallery-wrap {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+
+.gallery-grid > * {
+  grid-column: span 12;
+}
+
+@media (min-width: 768px) {
+  .gallery-grid > * {
+    grid-column: span 6;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-grid > * {
+    grid-column: span 4;
+  }
+}
+
+.case-wrap {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  line-height: 1.6;
+}
+
+.case-wrap h1 {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.case-wrap .tagline {
+  color: var(--muted);
+}
+
+.case-wrap .meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 1.5rem 0;
+}
+
+.case-wrap .prose h2 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.35rem;
+  margin-top: 2rem;
+}
+
+a.back-link {
+  color: var(--muted);
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+a.back-link:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,46 @@
+---
+import type { ProjectStatus } from "../../lib/spine/types";
+
+interface Props {
+  status: ProjectStatus;
+}
+const { status } = Astro.props;
+
+const styles: Record<ProjectStatus, string> = {
+  NOW: "badge-now",
+  PILOT: "badge-pilot",
+  FUTURE: "badge-future",
+};
+---
+<span class:list={["status-badge", styles[status]]}>{status}</span>
+
+<style>
+  .status-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .badge-now {
+    color: #0a0a0a;
+    background: #34d399;
+    box-shadow: 0 0 0 1px #34d399;
+    animation: pulse-now 2.5s ease-in-out infinite;
+  }
+  .badge-pilot {
+    color: #f5f5f5;
+    background: #3b82f6;
+    box-shadow: 0 0 0 1px #2563eb;
+  }
+  .badge-future {
+    color: #94a3b8;
+    background: transparent;
+    border: 1px solid #475569;
+  }
+  @keyframes pulse-now {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+  }
+</style>

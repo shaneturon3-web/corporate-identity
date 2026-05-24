@@ -1,0 +1,14 @@
+---
+/** Subdomain skins (Healthcare, Professional) — wired in Order 002+. */
+import MainLayout from "./MainLayout.astro";
+interface Props {
+  title?: string;
+  vertical?: string;
+}
+const { title, vertical = "default" } = Astro.props;
+---
+<MainLayout title={title}>
+  <div data-vertical={vertical}>
+    <slot />
+  </div>
+</MainLayout>

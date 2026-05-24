@@ -1,0 +1,168 @@
+.pro-wrap {
+  --bg: #0a0a0a;
+  --surface: #1a1a1a;
+  --border: #2a2a2a;
+  --text: #f5f5f5;
+  --muted: #94a3b8;
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--text);
+}
+
+.pro-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.25rem;
+  border-radius: 4px;
+}
+
+.pro-panel h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.pro-panel label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.pro-panel input,
+.pro-panel select {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.pro-panel button {
+  background: #f5f5f5;
+  color: #0a0a0a;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.pro-steps {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.pro-steps span {
+  color: var(--muted);
+  padding: 0.2rem 0.4rem;
+  border: 1px solid var(--border);
+}
+
+.pro-steps span.active {
+  color: var(--text);
+  border-color: #64748b;
+}
+
+.pro-msg {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  margin-top: 0.75rem;
+}
+
+.pro-dash-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 900px) {
+  .pro-dash-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .pro-card-span-4 {
+    grid-column: span 4;
+  }
+  .pro-card-span-8 {
+    grid-column: span 8;
+  }
+}
+
+.pro-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  min-height: 8rem;
+}
+
+.pro-card h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.pro-kanban {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+
+.pro-kanban-col {
+  min-width: 7rem;
+  flex: 1;
+}
+
+.pro-kanban-col h5 {
+  font-size: 0.65rem;
+  color: var(--muted);
+  margin: 0 0 0.35rem;
+}
+
+.pro-kanban-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.8rem;
+}
+
+.pro-kanban-col li {
+  padding: 0.35rem;
+  border: 1px solid var(--border);
+  margin-bottom: 0.25rem;
+}
+
+.pro-meter {
+  height: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  margin: 0.5rem 0;
+}
+
+.pro-meter-fill {
+  height: 100%;
+  background: #94a3b8;
+}
+
+.pro-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.ghost-badge {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 0.15rem 0.4rem;
+}

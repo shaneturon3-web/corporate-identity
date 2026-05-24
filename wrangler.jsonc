@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "corporate-identity",
+  "compatibility_date": "2026-05-24",
+  "pages_build_output_dir": "dist",
+  "vars": {
+    "SHIPYARD_ORIGIN": "https://shipyard.shaneturon.ca"
+  },
+  "r2_buckets": [
+    {
+      "binding": "PROSPINE_VAULT",
+      "bucket_name": "prospine-vault"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "SPINE_DB",
+      "database_name": "corespine-db",
+      "database_id": "3bbd7fa4-de1c-4a6b-b434-552942988382"
+    }
+  ]
+}

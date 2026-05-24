@@ -1,0 +1,45 @@
+---
+import IntakeShield from "../../components/wrappers/healthcare/IntakeShield";
+import ClinicalDashboard from "../../components/wrappers/healthcare/ClinicalDashboard";
+import ClinicalDisclaimer from "../../components/wrappers/healthcare/ClinicalDisclaimer.astro";
+import StatusBadge from "../../components/gallery/StatusBadge.astro";
+import "../../styles/tokens.css";
+import "../../styles/healthcare-wrapper.css";
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Clinic Pilot — Layer 2 Wrapper</title>
+</head>
+<body class="gallery-body">
+  <div class="gallery-wrap">
+    <a class="back-link" href="/psynova/">← PsyNova blueprint</a>
+    <div style="display:flex;align-items:center;gap:0.75rem;margin:1rem 0 0.25rem;">
+      <StatusBadge status="PILOT" />
+      <span class="layer-badge-inline">Layer 2 — Wrapper</span>
+    </div>
+    <h1 style="font-size:1.5rem;margin:0 0 0.25rem;">Virtual Clinic Pilot</h1>
+    <p class="tagline" style="color:#5eead4;font-size:0.9rem;margin-bottom:1.5rem;">Thick Shield · Law 25 ready</p>
+    <div class="grid" style="display:grid;gap:1.25rem;">
+      <IntakeShield client:load entityId="psynova-demo-entity" />
+      <ClinicalDashboard client:load />
+    </div>
+    <ClinicalDisclaimer />
+  </div>
+</body>
+</html>
+
+<style>
+  .layer-badge-inline {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+  }
+</style>
