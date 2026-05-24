@@ -19,12 +19,22 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   const url = new URL(context.request.url);
   const host = url.hostname.toLowerCase();
   const shipyardOrigin =
-    context.env.SHIPYARD_ORIGIN ?? "https://shipyard.shaneturon.ca";
+    context.env.SHIPYARD_ORIGIN ??
+    "https://shipyard-web.shaneturon3.workers.dev";
 
   if (host === "shipyard.shaneturon.ca") {
+    const originUrl = new URL(shipyardOrigin);
+    if (originUrl.hostname === host) {
+      return new Response(
+        "ShipYard proxy misconfigured: SHIPYARD_ORIGIN must not equal the public hostname (use workers.dev).",
+        { status: 503, headers: { "content-type": "text/plain; charset=utf-8" } },
+      );
+    }
     const target = new URL(url.pathname + url.search, shipyardOrigin);
     const headers = new Headers(context.request.headers);
+    headers.delete("host");
     headers.set("X-ShipYard-Perimeter", "shaneturon.ca");
+    headers.set("X-Forwarded-Host", host);
     return fetch(
       new Request(target.toString(), {
         method: context.request.method,

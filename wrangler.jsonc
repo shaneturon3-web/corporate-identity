@@ -4,7 +4,7 @@
   "compatibility_date": "2026-05-24",
   "pages_build_output_dir": "dist",
   "vars": {
-    "SHIPYARD_ORIGIN": "https://shipyard.shaneturon.ca"
+    "SHIPYARD_ORIGIN": "https://shipyard-web.shaneturon3.workers.dev"
   },
   "r2_buckets": [
     {

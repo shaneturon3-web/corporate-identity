@@ -7,7 +7,7 @@
 | `shaneturon.ca` | Static institutional identity (Astro `dist/`) |
 | `www.shaneturon.ca` | 301 → apex |
 | `psynova.shaneturon.ca` | Rewrite to `/psynova/` on same Pages project |
-| `shipyard.shaneturon.ca` | Reverse proxy → `SHIPYARD_ORIGIN` (ShipYard Web Worker) |
+| `shipyard.shaneturon.ca` | Reverse proxy → `SHIPYARD_ORIGIN` (`shipyard-web.*.workers.dev`; not the public hostname) |
 
 Implementation: `functions/_middleware.ts`
 
