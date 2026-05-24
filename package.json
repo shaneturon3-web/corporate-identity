@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
+    "demo:local": "bash scripts/local-demo-stack.sh",
+    "demo:local:ui": "bash scripts/local-demo-stack.sh --ui",
+    "demo:stop": "bash scripts/stop-demo-stack.sh",
     "start": "astro dev",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "astro preview",
