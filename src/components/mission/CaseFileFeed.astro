@@ -1,0 +1,44 @@
+---
+import TelemetrySparkline from "./TelemetrySparkline";
+import { caseFileMeta } from "../../lib/gallery/case-file-metadata";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  projects: CollectionEntry<"projects">[];
+  id?: string;
+}
+
+const { projects, id = "operational-feed" } = Astro.props;
+---
+<section class="mission-main" id={id}>
+  <h2 class="mission-section-label">Operational case file feed</h2>
+  <ol class="case-feed">
+    {projects.map((p, i) => {
+      const meta = caseFileMeta(p.slug);
+      return (
+        <li class="case-feed__item">
+          <span class="case-feed__dot" aria-hidden="true"></span>
+          <a href={`/projects/${p.slug}/`} class="glass-card case-file-card scan-target">
+            <div class="case-file-card__meta-tags">
+              <span>[NODE: {meta.node}]</span>
+              <span>[ENCRYPT: {meta.encrypt}]</span>
+              <span>[STATUS: {meta.telemetry}]</span>
+            </div>
+            <TelemetrySparkline client:visible seed={i + 1} />
+            <div>
+              <h3 class="case-file-card__title">{p.data.title}</h3>
+              <p class="case-file-card__tagline">{p.data.tagline}</p>
+              <span class="case-file-card__cta">Open case file →</span>
+            </div>
+          </a>
+        </li>
+      );
+    })}
+  </ol>
+</section>
+
+<style>
+  .scan-target {
+    /* scan-line from .glass-card:hover */
+  }
+</style>

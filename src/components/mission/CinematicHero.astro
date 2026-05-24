@@ -1,0 +1,51 @@
+---
+import LivePulse from "./LivePulse.astro";
+
+interface Props {
+  title: string;
+  subtitle: string;
+  liveCount: number;
+  totalCount: number;
+}
+
+const { title, subtitle, liveCount, totalCount } = Astro.props;
+
+/** Muted infrastructure / telemetry loop (royalty-free CDN). */
+const VIDEO_SRC =
+  "https://assets.mixkit.co/videos/preview/mixkit-earth-zoom-in-from-space-9970-large.mp4";
+---
+<section class="mission-hero" aria-label="Mission control hero">
+  <div class="mission-hero__fallback" aria-hidden="true"></div>
+  <video
+    class="mission-hero__video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    aria-hidden="true"
+  >
+    <source src={VIDEO_SRC} type="video/mp4" />
+  </video>
+  <div class="mission-hero__scan" aria-hidden="true"></div>
+  <div class="mission-hero__veil" aria-hidden="true"></div>
+  <div class="mission-hero__content">
+    <p class="mission-section-label" style="margin-bottom: 0.75rem; border: none; padding: 0;">
+      Institutional root · Mission control
+    </p>
+    <h1 class="mission-hero__title">{title}</h1>
+    <p class="mission-hero__subtitle">{subtitle}</p>
+    <div class="mission-hero__status-row">
+      <LivePulse label="CoreSpine telemetry online" />
+      <span class="mission-section-label" style="margin: 0; border: none; padding: 0;">
+        {liveCount} / {totalCount} case files active
+      </span>
+    </div>
+    <nav class="mission-nav" aria-label="Quick launch">
+      <a class="is-primary" href="#operational-feed">Operational feed ↓</a>
+      <a href="/professional/dashboard/">ProSpine</a>
+      <a href="/psynova/clinical/">PsyNova clinical</a>
+      <a href="https://shipyard.shaneturon.ca/" target="_blank" rel="noopener noreferrer">ShipYard console ↗</a>
+    </nav>
+  </div>
+</section>

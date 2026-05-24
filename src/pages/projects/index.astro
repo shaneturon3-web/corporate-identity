@@ -1,7 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import D1GalleryBridge from "../../components/gallery/D1GalleryBridge";
-import ProjectCard from "../../components/gallery/ProjectCard.astro";
+import CaseFileFeed from "../../components/mission/CaseFileFeed.astro";
+import LivePulse from "../../components/mission/LivePulse.astro";
 import type { Role } from "../../lib/auth/roles";
 import "../../styles/tokens.css";
 
@@ -15,45 +16,26 @@ const staticSlugs = projects.map((p) => p.slug);
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShipYard Gallery — Shane Turon</title>
+  <title>Operational Case Files — Shane Turon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
-<body class="gallery-body">
-  <div class="gallery-wrap">
-    <a class="back-link" href="/">← shaneturon.ca</a>
-    <h1>ShipYard Gallery</h1>
-    <p class="tagline">
-      Modular execution portfolio — high signal, restrained presentation.
-      D1 cards load without redeploy (<code>?role=BACKEND_ADMIN</code> reveals hidden).
+<body class="mission-body">
+  <div class="mission-main" style="padding-top: 2rem;">
+    <a class="back-link" href="/">← Mission control</a>
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin: 1rem 0 2rem;">
+      <h1 style="margin: 0; font-size: clamp(2rem, 5vw, 3rem); color: var(--accent); letter-spacing: -0.03em;">
+        Operational feed
+      </h1>
+      <LivePulse label="Gallery sync active" />
+    </div>
+    <p style="color: var(--muted); margin-bottom: 2rem; max-width: 40rem;">
+      Palantir-style case file timeline. D1 rows append below without redeploy
+      (<code style="color: var(--accent)">?role=BACKEND_ADMIN</code> for hidden modules).
     </p>
-    <div class="gallery-grid">
-      {projects.map((p) => (
-        <ProjectCard
-          title={p.data.title}
-          tagline={p.data.tagline}
-          status={p.data.status}
-          layer={p.data.layer}
-          category={p.data.category}
-          architecture={p.data.architecture}
-          href={`/projects/${p.slug}/`}
-          permissionLevel={p.data.permissionLevel}
-          viewerRole={viewerRole}
-        />
-      ))}
+    <CaseFileFeed projects={projects} id="gallery-feed" />
+    <div id="d1-feed-append" class="mission-main" style="padding: 0; margin-top: -1rem;">
       <D1GalleryBridge client:load role={viewerRole} excludeSlugs={staticSlugs} />
     </div>
   </div>
 </body>
 </html>
-
-<style>
-  h1 {
-    font-size: 1.75rem;
-    font-weight: 600;
-    margin: 1rem 0 0.5rem;
-  }
-  .tagline {
-    color: var(--muted);
-    margin-bottom: 2rem;
-    font-size: 0.95rem;
-  }
-</style>

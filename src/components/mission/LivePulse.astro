@@ -1,0 +1,10 @@
+---
+interface Props {
+  label?: string;
+}
+const { label = "Spine monitoring active" } = Astro.props;
+---
+<div class="live-pulse" role="status" aria-live="polite">
+  <span class="live-pulse__node" aria-hidden="true"></span>
+  <span>{label}</span>
+</div>
