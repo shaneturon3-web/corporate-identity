@@ -1,0 +1,31 @@
+---
+import AssociateDashboard from "../../components/holding/AssociateDashboard";
+import StatusBadge from "../../components/gallery/StatusBadge.astro";
+import "../../styles/tokens.css";
+
+const role = Astro.url.searchParams.get("role") ?? "";
+const allowed = role === "BACKEND_ADMIN";
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Associate Holdings — Backend</title>
+</head>
+<body class="gallery-body">
+  <div class="gallery-wrap">
+    <a class="back-link" href="/projects/?role=BACKEND_ADMIN">← Gallery</a>
+    {allowed ? (
+      <>
+        <StatusBadge status="NOW" />
+        <h1>Associate Compensation Matrix</h1>
+        <p class="tagline">Secret holding logic — hidden from public gallery.</p>
+        <AssociateDashboard client:load />
+      </>
+    ) : (
+      <p class="tagline">403 — append <code>?role=BACKEND_ADMIN</code> for backend access.</p>
+    )}
+  </div>
+</body>
+</html>

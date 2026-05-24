@@ -1,12 +1,19 @@
 /**
  * Unified domain perimeter — subdomain routing for shaneturon.ca zone.
  * @see docs/ORDER-001-ROUTING.md
+ * @see docs/ORDER-025-EXPANSION-SUBDOMAINS.md
  */
 interface Env {
   SHIPYARD_ORIGIN?: string;
 }
 
 const PSYNOVA_PREFIX = "/psynova";
+
+const EXPANSION_HOSTS: Record<string, string> = {
+  "insights.shaneturon.ca": "/insights",
+  "docs.shaneturon.ca": "/docs",
+  "status.shaneturon.ca": "/status",
+};
 
 export const onRequest: PagesFunction<Env> = async (context) => {
   const url = new URL(context.request.url);
@@ -26,6 +33,20 @@ export const onRequest: PagesFunction<Env> = async (context) => {
         redirect: "manual",
       }),
     );
+  }
+
+  const expansionPrefix = EXPANSION_HOSTS[host];
+  if (expansionPrefix) {
+    let path = url.pathname;
+    if (path === "/" || path === "") {
+      path = `${expansionPrefix}/`;
+    } else if (!path.startsWith(expansionPrefix)) {
+      path = `${expansionPrefix}${path.startsWith("/") ? path : `/${path}`}`;
+    }
+    if (path !== url.pathname) {
+      const target = new URL(path + url.search, url.origin);
+      return Response.redirect(target.toString(), 308);
+    }
   }
 
   if (host === "psynova.shaneturon.ca") {

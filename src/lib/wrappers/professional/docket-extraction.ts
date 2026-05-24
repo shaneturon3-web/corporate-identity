@@ -61,3 +61,9 @@ function parseLogLine(line: string): CommunicationLogLine | null {
 export const MOCK_COMMUNICATION_LOG = `[email] 12m T4 clarification thread @client:cli-001
 [call] 25m Year-end planning review @client:cli-002
 [email] 8m Receipt categorization follow-up @client:cli-001`;
+
+/** Mock log exceeding Pareto 20h/week threshold — Order 024 demo */
+export const MOCK_COMMUNICATION_LOG_PARETO = `[call] 480m Weekly review block @client:cli-001
+[call] 480m Advisory sessions @client:cli-002
+[email] 120m Compliance correspondence @client:cli-003
+[call] 240m Planning calls @client:cli-001`;

@@ -1,10 +1,14 @@
 ---
 import { getCollection } from "astro:content";
+import D1GalleryBridge from "../../components/gallery/D1GalleryBridge";
 import ProjectCard from "../../components/gallery/ProjectCard.astro";
+import type { Role } from "../../lib/auth/roles";
 import "../../styles/tokens.css";
 
+const viewerRole = (Astro.url.searchParams.get("role") ?? "PROFESSIONAL_USER") as Role;
 const all = await getCollection("projects", ({ data }) => !data.draft);
 const projects = all.sort((a, b) => a.data.order - b.data.order);
+const staticSlugs = projects.map((p) => p.slug);
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +21,10 @@ const projects = all.sort((a, b) => a.data.order - b.data.order);
   <div class="gallery-wrap">
     <a class="back-link" href="/">← shaneturon.ca</a>
     <h1>ShipYard Gallery</h1>
-    <p class="tagline">Modular execution portfolio — high signal, restrained presentation.</p>
+    <p class="tagline">
+      Modular execution portfolio — high signal, restrained presentation.
+      D1 cards load without redeploy (<code>?role=BACKEND_ADMIN</code> reveals hidden).
+    </p>
     <div class="gallery-grid">
       {projects.map((p) => (
         <ProjectCard
@@ -25,10 +32,14 @@ const projects = all.sort((a, b) => a.data.order - b.data.order);
           tagline={p.data.tagline}
           status={p.data.status}
           layer={p.data.layer}
+          category={p.data.category}
           architecture={p.data.architecture}
           href={`/projects/${p.slug}/`}
+          permissionLevel={p.data.permissionLevel}
+          viewerRole={viewerRole}
         />
       ))}
+      <D1GalleryBridge client:load role={viewerRole} excludeSlugs={staticSlugs} />
     </div>
   </div>
 </body>

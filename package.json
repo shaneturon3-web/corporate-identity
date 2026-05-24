@@ -13,6 +13,8 @@
     "db:spine:remote": "wrangler d1 execute corespine-db --remote --file=./db/migrations/initial-spine-schema.sql",
     "db:healthcare:remote": "wrangler d1 execute corespine-db --remote --file=./db/migrations/002-healthcare-shield.sql",
     "db:professional:remote": "wrangler d1 execute corespine-db --remote --file=./db/migrations/003-professional-accountant.sql",
+    "db:adaptive:local": "wrangler d1 execute corespine-db --local --file=./db/migrations/004-adaptive-expansion.sql",
+    "db:adaptive:remote": "wrangler d1 execute corespine-db --remote --file=./db/migrations/004-adaptive-expansion.sql",
     "astro": "astro"
   },
   "dependencies": {

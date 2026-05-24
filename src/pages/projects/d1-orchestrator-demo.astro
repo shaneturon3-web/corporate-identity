@@ -1,0 +1,29 @@
+---
+import StatusBadge from "../../components/gallery/StatusBadge.astro";
+import "../../styles/tokens.css";
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D1 Orchestrator — Live Card</title>
+</head>
+<body class="gallery-body">
+  <div class="case-wrap">
+    <a class="back-link" href="/projects/">← Gallery</a>
+    <StatusBadge status="PILOT" />
+    <h1>D1 Orchestrator (Live)</h1>
+    <p class="tagline">
+      This case file exists because a <code>project_data</code> row was inserted in D1 — no static markdown deploy required.
+    </p>
+    <div class="prose">
+      <h2>Adaptive renderer</h2>
+      <p>
+        Gallery cards merge content collection entries with D1 <code>project_data</code> and
+        <code>module_config</code> via <code>/api/gallery/projects</code>.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

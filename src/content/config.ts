@@ -11,6 +11,10 @@ const projectSchema = z.object({
   businessModel: z.string().optional(),
   complianceStrata: z.string().optional(),
   demoUrl: z.string().url().optional().or(z.literal("")),
+  category: z.string().optional(),
+  permissionLevel: z
+    .enum(["PUBLIC", "PROFESSIONAL", "OFFICE", "SUPERVISOR", "BACKEND"])
+    .optional(),
   draft: z.boolean().default(false),
   order: z.number().default(99),
 });

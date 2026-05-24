@@ -1,0 +1,48 @@
+---
+import "../../styles/tokens.css";
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Status — Shane Turon</title>
+</head>
+<body class="gallery-body">
+  <div class="gallery-wrap expansion-landing">
+    <p class="expansion-host">status.shaneturon.ca</p>
+    <h1>System Status</h1>
+    <p class="tagline">Perimeter health — restrained operational view.</p>
+    <ul class="status-list">
+      <li><span class="dot dot-ok" /> shaneturon.ca — institutional</li>
+      <li><span class="dot dot-ok" /> shipyard.shaneturon.ca — gallery proxy</li>
+      <li><span class="dot dot-pilot" /> psynova.shaneturon.ca — healthcare wrapper</li>
+      <li><span class="dot dot-pilot" /> D1 adaptive gallery — runtime API</li>
+    </ul>
+    <p style="font-size:0.8rem;color:var(--muted);">
+      Live probe: <code>/api/healthcare/health</code> · <code>/api/spine/health</code>
+    </p>
+  </div>
+</body>
+</html>
+
+<style>
+  .expansion-landing { max-width: 40rem; }
+  .expansion-host {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin: 0 0 0.5rem;
+  }
+  .status-list { list-style: none; padding: 0; color: #cbd5e1; }
+  .status-list li { display: flex; align-items: center; gap: 0.5rem; margin: 0.4rem 0; }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .dot-ok { background: #34d399; }
+  .dot-pilot { background: #38bdf8; }
+</style>

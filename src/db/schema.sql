@@ -48,3 +48,6 @@ CREATE TABLE IF NOT EXISTS professional_settings (
   admin_abyss_hours_saved REAL NOT NULL DEFAULT 12,
   updated_at TEXT NOT NULL
 );
+
+-- Adaptive gallery (Order 021) — see db/migrations/004-adaptive-expansion.sql
+-- project_data, module_config

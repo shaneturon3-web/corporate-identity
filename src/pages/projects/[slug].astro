@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import StatusBadge from "../../components/gallery/StatusBadge.astro";
+import WellnessTelehealth from "../../components/wrappers/wellness/WellnessTelehealth";
 import "../../styles/tokens.css";
 
 export async function getStaticPaths() {
@@ -30,6 +31,14 @@ const d = entry.data;
     <div class="prose">
       <Content />
     </div>
+    {entry.slug === "wellness-gateway" && (
+      <div style="margin-top:1.5rem;">
+        <WellnessTelehealth client:load />
+      </div>
+    )}
+    {entry.slug === "bureauforge" && (
+      <p class="meta" style="margin-top:1rem;">Wrapper status: FUTURE — see institutional scaffold.</p>
+    )}
   </div>
 </body>
 </html>

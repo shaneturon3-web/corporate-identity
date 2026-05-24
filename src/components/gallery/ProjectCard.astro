@@ -1,6 +1,8 @@
 ---
 import StatusBadge from "./StatusBadge.astro";
 import type { ProjectStatus } from "../../lib/spine/types";
+import type { PermissionLevel } from "../../lib/auth/roles";
+import { roleMeetsPermission, type Role } from "../../lib/auth/roles";
 import { layerLabel, type ArchitectureLayer } from "../../lib/gallery/layer-labels";
 
 interface Props {
@@ -10,14 +12,31 @@ interface Props {
   layer?: ArchitectureLayer;
   architecture: string[];
   href: string;
+  permissionLevel?: PermissionLevel;
+  viewerRole?: Role;
+  category?: string;
 }
-const { title, tagline, status, layer = 2, architecture, href } = Astro.props;
+const {
+  title,
+  tagline,
+  status,
+  layer = 2,
+  architecture,
+  href,
+  permissionLevel = "PUBLIC",
+  viewerRole = "PROFESSIONAL_USER",
+  category,
+} = Astro.props;
+
+const visible = roleMeetsPermission(viewerRole, permissionLevel);
 ---
+{visible && (
 <article class="project-card">
   <header class="card-head">
     <div class="icon-node" aria-hidden="true"></div>
     <div class="card-badges">
       <span class="layer-badge">{layerLabel(layer)}</span>
+      {category && <span class="layer-badge">{category}</span>}
       <StatusBadge status={status} />
     </div>
   </header>
@@ -28,6 +47,7 @@ const { title, tagline, status, layer = 2, architecture, href } = Astro.props;
   </ul>
   <a class="card-cta" href={href}>View case file →</a>
 </article>
+)}
 
 <style>
   .project-card {

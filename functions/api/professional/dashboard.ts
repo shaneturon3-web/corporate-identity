@@ -1,3 +1,4 @@
+import { parseRole, shouldRedactClientPii } from "../../../src/lib/auth/roles";
 import {
   listClientsByStatus,
   sumBillableMinutes,
@@ -11,6 +12,7 @@ interface Env {
 export const onRequest: PagesFunction<Env> = async (context) => {
   const url = new URL(context.request.url);
   const professionalId = url.searchParams.get("professionalId") ?? "pro-demo";
+  const role = parseRole(url.searchParams.get("role"));
   const byStatus = await listClientsByStatus(context.env.SPINE_DB, professionalId);
   const billableMinutes = await sumBillableMinutes(context.env.SPINE_DB, professionalId);
   const billableRecoveredCents = await sumBillableRecoveredCents(
@@ -29,5 +31,11 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     adminAbyssHoursSaved: settings?.admin_abyss_hours_saved ?? 12,
     byStatus,
     leadGenActive: (settings?.lead_gen_active ?? 0) === 1,
+    role,
+    piiRedacted: shouldRedactClientPii(role),
+    analista: {
+      billableHours: billableMinutes / 60,
+      recoveredCad: billableRecoveredCents / 100,
+    },
   });
 };

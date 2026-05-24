@@ -1,0 +1,37 @@
+---
+import "../../styles/tokens.css";
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docs — Shane Turon</title>
+</head>
+<body class="gallery-body">
+  <div class="gallery-wrap expansion-landing">
+    <p class="expansion-host">docs.shaneturon.ca</p>
+    <h1>Documentation</h1>
+    <p class="tagline">Execution specs, routing orders, and wrapper references.</p>
+    <ul>
+      <li>ORDER-001 routing — <code>docs/ORDER-001-ROUTING.md</code> in repo</li>
+      <li>ORDER-025 expansion subdomains — <code>docs/ORDER-025-EXPANSION-SUBDOMAINS.md</code></li>
+      <li><a href="/projects/">Gallery case files</a></li>
+    </ul>
+  </div>
+</body>
+</html>
+
+<style>
+  .expansion-landing { max-width: 40rem; }
+  .expansion-host {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin: 0 0 0.5rem;
+  }
+  .expansion-landing ul { color: var(--muted); line-height: 1.8; }
+  .expansion-landing a { color: var(--accent); }
+  code { font-size: 0.8rem; color: #cbd5e1; }
+</style>

@@ -9,6 +9,8 @@ import "../../styles/professional-wrapper.css";
 
 const professionalId = "pro-demo";
 const demoClientId = "cli-demo-vault";
+/** Demo RBAC — pass ?role=SUPERVISOR | BACKEND_ADMIN | ACCOUNTANT */
+const roleParam = Astro.url.searchParams.get("role") ?? "PROFESSIONAL_USER";
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +28,11 @@ const demoClientId = "cli-demo-vault";
     </div>
     <h1 style="font-size:1.5rem;font-weight:500;margin:0 0 0.25rem;">ProSpine Accountant</h1>
     <p class="tagline" style="margin-bottom:1.5rem;">Light Shield · Ghost Mode · CoreSpine Layer 1</p>
-    <ProSpineDashboard client:load professionalId={professionalId} />
+    <p class="tagline" style="font-size:0.8rem;">
+      Role demo: append <code>?role=SUPERVISOR</code> for redacted ledger ·
+      <code>?role=BACKEND_ADMIN</code> for full access
+    </p>
+    <ProSpineDashboard client:load professionalId={professionalId} role={roleParam} />
     <div class="stack" style="display:grid;gap:1.25rem;margin-top:1.25rem;">
       <div class="stack-2" style="display:grid;gap:1.25rem;">
         <Intake client:load professionalId={professionalId} />

@@ -8,6 +8,7 @@ import {
 import {
   extractBillableEventsFromLog,
   MOCK_COMMUNICATION_LOG,
+  MOCK_COMMUNICATION_LOG_PARETO,
 } from "../../../lib/wrappers/professional/docket-extraction";
 
 interface Props {
@@ -59,9 +60,26 @@ export default function BillingModule({ professionalId }: Props) {
           }}
         />
       </label>
-      <button type="button" onClick={runExtraction}>
-        Extract billable events
-      </button>
+      <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+        <button type="button" onClick={runExtraction}>
+          Extract billable events
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setLog(MOCK_COMMUNICATION_LOG_PARETO);
+            const extracted = extractBillableEventsFromLog(professionalId, MOCK_COMMUNICATION_LOG_PARETO);
+            setEvents(extracted);
+            fetch("/api/professional/billable", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({ events: extracted }),
+            }).then(() => window.dispatchEvent(new CustomEvent("prospine-billable-updated")));
+          }}
+        >
+          Mock Pareto week (20h+)
+        </button>
+      </div>
       {events.length > 0 && (
         <p className="pro-msg">
           {events.length} events · {events.reduce((s, e) => s + e.durationMinutes, 0)} min · est. $

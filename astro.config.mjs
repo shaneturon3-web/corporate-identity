@@ -10,6 +10,9 @@ export const SITE_HOSTS = {
   root: "shaneturon.ca",
   shipyard: "shipyard.shaneturon.ca",
   psynova: "psynova.shaneturon.ca",
+  insights: "insights.shaneturon.ca",
+  docs: "docs.shaneturon.ca",
+  status: "status.shaneturon.ca",
 };
 
 export default defineConfig({
@@ -29,6 +32,9 @@ export default defineConfig({
         SITE_HOSTS.root,
         SITE_HOSTS.shipyard,
         SITE_HOSTS.psynova,
+        SITE_HOSTS.insights,
+        SITE_HOSTS.docs,
+        SITE_HOSTS.status,
       ],
     },
   },

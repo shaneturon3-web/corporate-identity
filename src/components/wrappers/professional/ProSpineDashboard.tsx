@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import ProgressTracker from "../../gallery/ProgressTracker";
+import { parseRole, shouldRedactClientPii, type Role } from "../../../lib/auth/roles";
+import { evaluateWeeklyBillable } from "../../../lib/core/gamification-engine";
 import type { TaxFilingStatus } from "../../../lib/wrappers/professional/types";
 
 const STATUSES: TaxFilingStatus[] = [
@@ -19,14 +22,17 @@ interface DashboardData {
 
 interface Props {
   professionalId: string;
+  role?: Role | string;
 }
 
-export default function ProSpineDashboard({ professionalId }: Props) {
+export default function ProSpineDashboard({ professionalId, role: roleProp = "PROFESSIONAL_USER" }: Props) {
+  const role = parseRole(typeof roleProp === "string" ? roleProp : roleProp);
   const [data, setData] = useState<DashboardData | null>(null);
   const [leadGen, setLeadGen] = useState(false);
+  const [gamNotice, setGamNotice] = useState<string | null>(null);
 
   function loadDashboard() {
-    fetch(`/api/professional/dashboard?professionalId=${professionalId}`)
+    fetch(`/api/professional/dashboard?professionalId=${professionalId}&role=${role}`)
       .then((r) => r.json())
       .then((d) => {
         setData(d);
@@ -39,9 +45,14 @@ export default function ProSpineDashboard({ professionalId }: Props) {
     const onUpdate = () => loadDashboard();
     window.addEventListener("prospine-billable-updated", onUpdate);
     return () => window.removeEventListener("prospine-billable-updated", onUpdate);
-  }, [professionalId]);
+  }, [professionalId, role]);
 
   const billedHours = (data?.billableMinutes ?? 0) / 60;
+  const gam = evaluateWeeklyBillable(billedHours);
+
+  useEffect(() => {
+    if (gam.showUpgradeCta) setGamNotice(gam.ctaMessage);
+  }, [gam.showUpgradeCta, gam.ctaMessage]);
   const saved = data?.adminAbyssHoursSaved ?? 0;
   const pct = saved > 0 ? Math.min(100, Math.round((billedHours / saved) * 100)) : 0;
 
@@ -62,6 +73,22 @@ export default function ProSpineDashboard({ professionalId }: Props) {
           <div className="pro-meter-fill" style={{ width: `${pct}%` }} />
         </div>
         <p style={{ fontSize: "0.75rem", color: "#64748b" }}>{pct}% conversion to dockets</p>
+        {shouldRedactClientPii(role) && (
+          <p style={{ fontSize: "0.75rem", color: "#f59e0b", marginTop: "0.5rem" }}>
+            Supervisor view — client PII redacted in ledger; Analista metrics visible.
+          </p>
+        )}
+        <ProgressTracker
+          label="Weekly billable (Pareto)"
+          progressPct={gam.progressPct}
+          sublabel={`${billedHours.toFixed(1)}h / ${gam.threshold}h threshold`}
+          highlight={gam.showUpgradeCta}
+        />
+        {gamNotice && (
+          <p className="gam-cta" role="status">
+            {gamNotice}
+          </p>
+        )}
       </div>
 
       <div className="pro-card pro-card-span-8">
@@ -78,7 +105,9 @@ export default function ProSpineDashboard({ professionalId }: Props) {
                     <li style={{ color: "#64748b" }}>—</li>
                   ) : (
                     Array.from({ length: Math.min(count, 5) }).map((_, i) => (
-                      <li key={i}>Client {i + 1}</li>
+                      <li key={i}>
+                        {shouldRedactClientPii(role) ? `Client ${String.fromCharCode(65 + i)}•••` : `Client ${i + 1}`}
+                      </li>
                     ))
                   )}
                 </ul>
@@ -109,6 +138,16 @@ export default function ProSpineDashboard({ professionalId }: Props) {
           Hooks Brand-mode pipeline when enabled — Light Shield only (PIPEDA).
         </p>
       </div>
+      <style>{`
+        .gam-cta {
+          margin: 0.5rem 0 0;
+          padding: 0.5rem 0.65rem;
+          border: 1px solid #94a3b8;
+          font-size: 0.8rem;
+          color: #e2e8f0;
+          background: rgba(148, 163, 184, 0.08);
+        }
+      `}</style>
     </div>
   );
 }
