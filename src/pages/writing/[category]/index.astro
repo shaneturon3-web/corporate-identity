@@ -1,0 +1,44 @@
+---
+import WritingShell from "../../../components/writing/WritingShell.astro";
+import WritingNav from "../../../components/writing/WritingNav.astro";
+import PostCard from "../../../components/writing/PostCard.astro";
+import {
+  WRITING_CATEGORIES,
+  CATEGORY_LABELS,
+  CATEGORY_DESCRIPTIONS,
+  isWritingCategory,
+} from "../../../lib/writing/categories";
+import { getWritingByCategory } from "../../../lib/writing/posts";
+
+export async function getStaticPaths() {
+  return WRITING_CATEGORIES.map((category) => ({ params: { category } }));
+}
+
+const { category: rawCategory } = Astro.params;
+
+if (!rawCategory || !isWritingCategory(rawCategory)) {
+  return Astro.redirect("/writing/");
+}
+
+const category = rawCategory;
+const posts = await getWritingByCategory(category);
+---
+<WritingShell title={CATEGORY_LABELS[category]} lang="en">
+  <WritingNav slot="nav" current={category} />
+  <a class="back-link" href="/writing/">← Writing</a>
+  <p class="writing-kicker" style="margin-top: 1rem;">{category}</p>
+  <h1 class="writing-title">{CATEGORY_LABELS[category]}</h1>
+  <p class="writing-lede">{CATEGORY_DESCRIPTIONS[category]}</p>
+
+  {
+    posts.length > 0 ? (
+      <div class="writing-grid">
+        {posts.map((entry) => (
+          <PostCard entry={entry} showCategory={false} />
+        ))}
+      </div>
+    ) : (
+      <p style="color: var(--muted); font-size: 0.9rem;">No published posts in this category yet.</p>
+    )
+  }
+</WritingShell>
