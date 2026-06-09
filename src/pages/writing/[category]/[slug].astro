@@ -1,0 +1,58 @@
+---
+import WritingShell from "../../../components/writing/WritingShell.astro";
+import WritingNav from "../../../components/writing/WritingNav.astro";
+import { getCollection, render } from "astro:content";
+import {
+  CATEGORY_LABELS,
+  isWritingCategory,
+} from "../../../lib/writing/categories";
+import { formatWritingDate } from "../../../lib/writing/posts";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("writing", ({ data }) => !data.draft);
+  return posts.map((entry) => ({
+    params: {
+      category: entry.data.category,
+      slug: entry.slug,
+    },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { category: rawCategory, slug: rawSlug } = Astro.params;
+
+if (
+  !rawCategory ||
+  !isWritingCategory(rawCategory) ||
+  entry.data.category !== rawCategory ||
+  entry.slug !== rawSlug
+) {
+  return Astro.redirect("/writing/");
+}
+
+const { Content } = await render(entry);
+const { title, date, summary, tags, language, category } = entry.data;
+const backHref = `/writing/${category}/`;
+---
+<WritingShell title={title} lang={language}>
+  <WritingNav slot="nav" current={category} />
+  <a class="back-link" href={backHref}>← {CATEGORY_LABELS[category]}</a>
+  <p class="writing-kicker" style="margin-top: 1rem;">
+    {formatWritingDate(date, language)} · {CATEGORY_LABELS[category]}
+  </p>
+  <h1 class="writing-title">{title}</h1>
+  <p class="writing-lede">{summary}</p>
+  {
+    tags.length > 0 && (
+      <div class="writing-tags" style="margin-bottom: 2rem;">
+        {tags.map((tag) => (
+          <span class="writing-tag">{tag}</span>
+        ))}
+      </div>
+    )
+  }
+  <div class="writing-prose">
+    <Content />
+  </div>
+</WritingShell>

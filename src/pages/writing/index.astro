@@ -1,0 +1,75 @@
+---
+import WritingShell from "../../components/writing/WritingShell.astro";
+import WritingNav from "../../components/writing/WritingNav.astro";
+import PostCard from "../../components/writing/PostCard.astro";
+import {
+  WRITING_CATEGORIES,
+  CATEGORY_LABELS,
+  CATEGORY_DESCRIPTIONS,
+} from "../../lib/writing/categories";
+import { getPublishedWriting, getWritingByCategory } from "../../lib/writing/posts";
+import "../../styles/writing.css";
+
+const recent = await getPublishedWriting();
+const byCategory = await Promise.all(
+  WRITING_CATEGORIES.map(async (cat) => ({
+    category: cat,
+    posts: (await getWritingByCategory(cat)).slice(0, 3),
+  })),
+);
+---
+<WritingShell title="Writing" description="Essays, stories, jokes, and project notes." wide>
+  <WritingNav slot="nav" current="home" />
+  <p class="writing-kicker">shaneturon.ca / writing</p>
+  <h1 class="writing-title">Writing</h1>
+  <p class="writing-lede">
+    A simple surface for essays, short fiction, lighter bits, and build notes —
+    published as Markdown, built statically, with no CRM scope.
+  </p>
+
+  {
+    recent.length > 0 && (
+      <section>
+        <h2 class="writing-kicker" style="margin-top: 2rem;">Recent</h2>
+        <div class="writing-grid">
+          {recent.slice(0, 6).map((entry) => (
+            <PostCard entry={entry} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    byCategory.map(({ category, posts }) => (
+      <section style="margin-top: 2.5rem;">
+        <h2 class="writing-kicker">{CATEGORY_LABELS[category]}</h2>
+        <p class="writing-lede" style="margin-bottom: 1rem; font-size: 0.9rem;">
+          {CATEGORY_DESCRIPTIONS[category]}
+          {" "}
+          <a href={`/writing/${category}/`} style="color: var(--accent);">View all →</a>
+        </p>
+        {posts.length > 0 ? (
+          <div class="writing-grid">
+            {posts.map((entry) => (
+              <PostCard entry={entry} showCategory={false} />
+            ))}
+          </div>
+        ) : (
+          <p style="color: var(--muted); font-size: 0.9rem;">No posts yet.</p>
+        )}
+      </section>
+    ))
+  }
+
+  <section class="writing-publish">
+    <p><strong>Publishing flow</strong></p>
+    <p>
+      Add a <code>.md</code> file to <code>src/content/writing/</code> with frontmatter:
+      <code>title</code>, <code>date</code>, <code>category</code> (<code>articles</code> |
+      <code>stories</code> | <code>jokes</code> | <code>projects</code>),
+      <code>summary</code>, <code>tags</code>, <code>draft</code>, <code>language</code>.
+      Set <code>draft: true</code> to hide until ready. Run <code>npm run build</code>, then deploy.
+    </p>
+  </section>
+</WritingShell>

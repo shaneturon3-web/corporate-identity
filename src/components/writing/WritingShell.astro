@@ -1,0 +1,20 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import "../../styles/writing.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+  wide?: boolean;
+}
+
+const { title, description, lang = "en", wide = false } = Astro.props;
+const pageTitle = `${title} — Writing | Shane Turon`;
+---
+<MainLayout title={pageTitle}>
+  <main class:list={["writing-shell", wide && "writing-shell--wide"]} lang={lang}>
+    <slot name="nav" />
+    <slot />
+  </main>
+</MainLayout>

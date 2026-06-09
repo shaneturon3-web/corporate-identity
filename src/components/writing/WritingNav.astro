@@ -1,0 +1,23 @@
+---
+import {
+  WRITING_CATEGORIES,
+  CATEGORY_LABELS,
+  type WritingCategory,
+} from "../../lib/writing/categories";
+
+interface Props {
+  current?: WritingCategory | "home";
+}
+
+const { current = "home" } = Astro.props;
+---
+<nav class="writing-nav" aria-label="Writing sections">
+  <a href="/writing/" aria-current={current === "home" ? "page" : undefined}>All</a>
+  {
+    WRITING_CATEGORIES.map((cat) => (
+      <a href={`/writing/${cat}/`} aria-current={current === cat ? "page" : undefined}>
+        {CATEGORY_LABELS[cat]}
+      </a>
+    ))
+  }
+</nav>
